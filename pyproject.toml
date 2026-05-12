@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "anypython"
+version = "0.1.0"
+authors = [
+  { name="Aya Jackson", email="pixelmixery@gmail.com" },
+]
+description = "A set of anytype actions for automation"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "requests",
+]
+
+# uv sync --extra dev
+[project.optional-dependencies]
+dev = [
+    "ruff",               # Fast linting  
+    "pytest",             # Testing framework
+]
