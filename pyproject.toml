@@ -12,7 +12,9 @@ description = "A set of anytype actions for automation"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
-    "requests",
+    "requests",           # actually make the REST API calls
+    "pydantic_settings",  # elegant env variables
+    "python-json-logger", # Structured logging
 ]
 
 # uv sync --extra dev
@@ -20,4 +22,5 @@ dependencies = [
 dev = [
     "ruff",               # Fast linting  
     "pytest",             # Testing framework
+    "pylint-pytest"       # Prevent Pylint from worrying about pytest
 ]
