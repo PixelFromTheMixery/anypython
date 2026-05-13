@@ -12,12 +12,10 @@ Variables:
 
     RESPONSE_MAP (dict): lambda map of API request types
 
-    HEADERS ()
+    HEADERS (dict): sets up anytype api response for reuse
 
 Methods:
-    method: Description of a module-level method.
-
-#TODO: Upcoming task or fix.
+    make_call: Performs the actual contact with Anytype
 """
 # endregion
 
@@ -64,30 +62,6 @@ HEADERS = {
     "Authorization": "Bearer " + fetch_settings().anypython_key,
     "Anytype-Version": "2025-11-08",
 }
-
-
-def exception_handler(e, result, attempt):
-    # region Docs
-    """
-    Records the Exception Message for troubleshooting
-
-    Args:
-        e (RequestException): Exception raised by call
-        result (Response): Message may contain solution
-        attempt (int): number of tries
-
-    Returns:
-        type: Description of return value.
-    Raises:
-        Exception: Conditions.
-    """
-    # endregion
-
-    print(f"RequestException on attempt {attempt}: {e}")
-    message = result.get("message") if result else None
-    if message:
-        print(f"json response: {message}")
-    return RETRIES + 1
 
 
 def make_call(
@@ -150,6 +124,6 @@ def make_call(
                 continue
 
             # If it's not a 429, or we ran out of 429 retries, handle normally
-            attempt = exception_handler(e, response, attempt)
+            logger.error("RequestException: %s", {e})
             if attempt > RETRIES:
                 raise

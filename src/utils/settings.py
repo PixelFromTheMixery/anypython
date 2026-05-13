@@ -4,9 +4,6 @@ Settings for the rest of the app
 
 Anytype connection setup
 
-Variables:
-    variable (type): Description of a module-level variable.
-
 Classes:
     EnvSettings(BaseSettings): Uses env variables to be used in other areas
 
